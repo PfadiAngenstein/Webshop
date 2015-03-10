@@ -1,0 +1,302 @@
+/*
+ *  Colors: #2A2A2A; #333; #FFA400; #FAFAFA
+ */
+
+body {
+    font-family: "Gudea", sans-serif;
+    color: #333;
+    background: #FAFAFA;
+    font-size: 1.1em;
+}
+
+a,
+a:link,
+a:visited {
+    color: #FFA400;
+    text-decoration: underline;
+}
+
+a:hover,
+a:active {
+    color: #333;
+    text-decoration: underline;
+    transition: all .2s ease-in;
+}
+
+code {
+    font-family: 'Source Code Pro', 'Consolas', 'Courier New', monospace;
+    background: #9e9e9e;
+    border: 1px solid #777777;
+    padding: 0.2em;
+    border-radius: 4px;
+}
+
+::selection {
+    background-color: #FFA400;
+    color: #000000;
+}
+
+.banner {
+    background: #FFEB3B;
+    padding-top: 1em;
+    margin-bottom: 1em;
+}
+
+.banner h1 {
+    margin-top: 0;
+    padding-bottom: 0.25em;
+    font-size: 4.5em;
+}
+
+.banner h1 img {
+    display: inline;
+    vertical-align: middle;
+    height: 130px;
+}
+
+.banner a,
+.banner a:link,
+.banner a:hover,
+.banner a:active,
+.banner a:visited,
+.shopping-cart a,
+.shopping-cart a:hover,
+.shopping-cart a:link,
+.shopping-cart a:active,
+.shopping-cart a:visited,
+h2 a,
+h2 a:link,
+h2 a:visited,
+h2 a:hover,
+h2 a:active {
+    color: #2A2A2A;
+    text-decoration: none;
+}
+
+table, tr, td {
+	vertical-align: top;
+}
+
+.wichtig {
+    color: #F44336;
+}
+
+.content {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.p-code {
+	display: none;
+}
+
+#products-wrapper {
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+h1 {
+    font-size: 2em;
+    letter-spacing: -0.09em;
+}
+
+.preis {
+    font-weight: bold;
+}
+
+.clear {
+    clear: both;
+}
+
+footer {
+    font-size: 0.8em;
+    text-align: center;
+}
+
+.products {
+    width: 60%;
+    float: left;
+    margin-right: 10px;
+}
+
+.product {
+    margin-bottom: 10px;
+    background: #FFF;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.product .product-thumb {
+    float: left;
+    height: 100px;
+    width: 100px;
+    margin-right: 10px;
+}
+
+.product-thumb img {
+    width: auto;
+    max-width: 100px;
+    height: 100%;
+}
+
+.product .product-content {
+    overflow: hidden;
+}
+
+.product .product-content h3 {
+    font-size: 1.2em;
+    margin: 0px;
+    padding: 0px;
+    color: #2A2A2A;
+}
+
+.product .product-info {
+    float: right;
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+.shopping-cart {
+    width: 30%;
+    float: left;
+    background: #FFF;
+    padding: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.shopping-cart h2 {
+    background: #FFF;
+    padding: 4px;
+    font-size: 1.1em;
+    margin: -10px -10px 5px;
+    color: #2A2A2A;
+    border-radius: 5px;
+}
+
+.shopping-cart h3,
+.view-cart h3 {
+    font-size: 1.1em;
+    margin: 0px;
+    padding: 0px;
+}
+
+.shopping-cart ol {
+    padding: 1px 0px 0px 15px;
+}
+
+.shopping-cart .cart-itm,
+.view-cart .cart-itm {
+    border-bottom: 1px solid #DDD;
+    font-size: 1em;
+    font-family: "Gudea", sans-serif;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+.shopping-cart .remove-itm,
+.view-cart .remove-itm {
+    font-size: 1em;
+    float: right;
+    background: #D5D5D5;
+    padding: 4px;
+    line-height: 8px;
+    border-radius: 3px;
+}
+
+.shopping-cart .remove-itm:hover,
+.view-cart .remove-itm:hover {
+    background: #C4C4C4;
+}
+
+.shopping-cart .remove-itm a,
+.view-cart .remove-itm a {
+    color: #2A2A2A;
+    text-shadow: 1px 1px 1px #ECECEC;
+    text-decoration: none;
+}
+
+.check-out-txt {
+    float: right;
+}
+
+.bestelltotal {
+    width: 100%;
+    text-align: right;
+}
+/*** view cart **/
+
+.view-cart {
+    width: 100%;
+    float: left;
+    background: #FFF;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 1em;
+}
+
+.view-cart .p-price {
+    float: right;
+    margin-right: 10px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.view-cart .product-info {
+    width: 60%;
+}
+/*
+ *    FONT
+ */
+
+@font-face {
+    font-family: 'Gudea';
+    src: url('../fonts/gudea-regular.eot');
+    src: url('../fonts/gudea-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/gudea-regular.woff') format('woff'), url('../fonts/gudea-regular.ttf') format('truetype'), url('../fonts/gudea-regular.svg#GudeaRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gudea';
+    src: url('../fonts/gudea-italic.eot');
+    src: url('../fonts/gudea-italic.eot?#iefix') format('embedded-opentype'), url('../fonts/gudea-italic.woff') format('woff'), url('../fonts/gudea-italic.ttf') format('truetype'), url('../fonts/gudea-italic.svg#GudeaItalic') format('svg');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Gudea';
+    src: url('../fonts/gudea-bold.eot');
+    src: url('../fonts/gudea-bold.eot?#iefix') format('embedded-opentype'), url('../fonts/gudea-bold.woff') format('woff'), url('../fonts/gudea-bold.ttf') format('truetype'), url('../fonts/gudea-bold.svg#GudeaBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@media only screen and (max-width: 1000px) {
+    body {
+        font-size: 1em;
+    }
+    .content,
+    #products-wrapper {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .content,
+    #products-wrapper {
+        width: 95%;
+    }
+    .products,
+    .shopping-cart {
+        width: 100%;
+    }
+    .banner h1 {
+        font-size: 2.25em;
+    }
+    .banner h1 img {
+        height: 65px;
+    }
+}
