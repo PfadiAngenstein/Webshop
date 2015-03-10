@@ -1,5 +1,5 @@
 # Webshop der Pfadi Angenstein
-Erreichbar unter [www.pfadiangenstein.ch/shop](http://www.pfadiangenstein.ch/shop]
+Erreichbar unter [www.pfadiangenstein.ch/shop](http://www.pfadiangenstein.ch/shop)
 
 ##Kontakt
 [shop@pfadiangenstein.ch](mailto:shop@pfadiangenstein.ch)
