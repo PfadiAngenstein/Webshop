@@ -1,17 +1,21 @@
 <?php
     session_start();
     include_once("config.php");
+    include_once("functions.php");
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="ISO-8859-4">
+    <meta charset="utf-8">
     <meta name="theme-color" content="#FFEB3B">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     
     <title>Webshop - Pfadi Angenstein</title>
     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style/normalize.css">
     <link rel="stylesheet" type="text/css" href="style/style.css">
 </head>
@@ -28,7 +32,7 @@
         <?php
         //current URL of the Page. cart_update.php redirects back to this URL
         $current_url = base64_encode($url="http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-
+        $mysqli = getDbConnection();
         $results = $mysqli->query("SELECT * FROM products ORDER BY id ASC");
         if ($results) { 
 
@@ -41,7 +45,7 @@
                 echo '<div class="product-content"><h3>'.$obj->product_name.'</h3>';
                 echo '<div class="product-desc">'.$obj->product_desc.'</div>';
                 echo '<div class="product-info">';
-                echo '<span class="preis">Preis '.$currency.$obj->price.' </span>| ';
+                echo '<span class="preis">Preis '.$GLOBALS['cfg_db_currency'].$obj->price.' </span>| ';
                 echo 'Anzahl <input type="number" name="product_qty" value="1" size="3" />';
                 echo '<button class="add_to_cart">In den Warenkorb</button>';
                 echo '</div></div>';
@@ -56,7 +60,8 @@
         ?>
     </div>
     
-    <div class="shopping-cart">
+    <div id="sticky-anchor"></div>
+    <div class="shopping-cart" id="shopping-cart">
         <h2><a href="view_cart.php">Warenkorb</a></h2>
         <?php
         if(isset($_SESSION["products"]))

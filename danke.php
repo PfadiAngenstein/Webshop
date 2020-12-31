@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="ISO-8859-4">
+	<meta charset="UTF-8">
 	<meta name="theme-color" content="#FFEB3B">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<title>Warenkorb - Pfadi Angenstein</title>
+	<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="style/normalize.css">
 	<link rel="stylesheet" type="text/css" href="style/style.css">
 	<link rel="stylesheet" type="text/css" href="style/colorbox.css">
@@ -22,11 +23,13 @@
 
  <div class="view-cart">
  	<h2>Bestellung wurde versendet!</h2>
- 	<p>Besten Dank für Ihre Bestellung.</p>
- 	<p>Bei Fragen zu Ihrer Bestellung wenden Sie sich an <a href="mailto:shop@pfadiangenstein.ch">shop@pfadiangenstein.ch</a>.</p>
- 	<p>Der Verantwortliche des Shops wird sich bei Ihnen melden.</p>
-	<p>Gehen Sie zurück auf <a href="http://www.pfadiangenstein.ch">www.pfadiangenstein.ch</a>.</p>
-</div>
+ 	<p>Besten Dank f&uuml;r Ihre Bestellung.</p>
+ 	<p>Bei Fragen zu Ihrer Bestellung wenden Sie sich an den Verantwortlichen der Bekleidungsstelle.</p>
+	<p>Gehen Sie zur&uuml;ck auf <a href="http://www.pfadiangenstein.ch">www.pfadiangenstein.ch</a>.</p>
+    </div>
+
+
+
 
 </div>
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("config.php");
+include_once("functions.php");
 
 //empty cart by distroying current session
 if(isset($_GET["emptycart"]) && $_GET["emptycart"]==1)
@@ -23,6 +23,7 @@ if(isset($_POST["type"]) && $_POST["type"]=='add')
 	}
 
 	//MySqli query - get details of item from db using product code
+	$mysqli = getDbConnection();
 	$results = $mysqli->query("SELECT product_name,price FROM products WHERE product_code='$product_code' LIMIT 1");
 	$obj = $results->fetch_object();
 	

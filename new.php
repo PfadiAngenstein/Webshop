@@ -90,7 +90,7 @@
  if ($id == '' || $product_code == '' || $product_name == '' || $product_desc == '' || $price == "")
  {
  // generate error message
- $error = 'FEHLER: Bitte alle Felder ausfÃ¼llen!';
+ $error = 'FEHLER: Bitte alle Felder ausfüllen!';
  
  // if either field is blank, display the form again
 renderForm($id, $product_code, $product_name, $product_desc, $product_img_name, $product_img_name, $price);

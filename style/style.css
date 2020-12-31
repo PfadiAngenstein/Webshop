@@ -1,4 +1,13 @@
 @import 'https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700';
+/* IFRAME NEW WEBPAGE */
+footer,
+.banner {
+	display: none;
+}
+html body {
+	background: initial;
+	padding-top: 25px;
+}
 
 body {
     font-family: "PT Sans", sans-serif;
@@ -38,7 +47,7 @@ code {
     background: #FFEB3B;
     padding-top: 1em;
     margin-bottom: 1em;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.22), 0 14px 56px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px rgba(0, 0, 0, 0.16)
 }
 
 .banner h1 {
@@ -192,7 +201,7 @@ footer {
 .view-cart .cart-itm {
     border-bottom: 1px solid #DDD;
     font-size: 1em;
-    font-family: "Gudea", sans-serif;
+    font-family: "PT Sans", sans-serif;
     margin-bottom: 5px;
     padding-bottom: 5px;
 
@@ -252,33 +261,6 @@ footer {
 
 .view-cart .product-info {
     width: 60%;
-}
-/*
- *    FONT
- */
-
-@font-face {
-    font-family: 'Gudea';
-    src: url('../fonts/gudea-regular.eot');
-    src: url('../fonts/gudea-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/gudea-regular.woff') format('woff'), url('../fonts/gudea-regular.ttf') format('truetype'), url('../fonts/gudea-regular.svg#GudeaRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Gudea';
-    src: url('../fonts/gudea-italic.eot');
-    src: url('../fonts/gudea-italic.eot?#iefix') format('embedded-opentype'), url('../fonts/gudea-italic.woff') format('woff'), url('../fonts/gudea-italic.ttf') format('truetype'), url('../fonts/gudea-italic.svg#GudeaItalic') format('svg');
-    font-weight: normal;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Gudea';
-    src: url('../fonts/gudea-bold.eot');
-    src: url('../fonts/gudea-bold.eot?#iefix') format('embedded-opentype'), url('../fonts/gudea-bold.woff') format('woff'), url('../fonts/gudea-bold.ttf') format('truetype'), url('../fonts/gudea-bold.svg#GudeaBold') format('svg');
-    font-weight: bold;
-    font-style: normal;
 }
 
 @media only screen and (max-width: 1000px) {

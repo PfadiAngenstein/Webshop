@@ -1,0 +1,32 @@
+@import 'https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700';
+
+body {
+    color: #333;
+    width: 100%;
+    font-family: "PT Sans", sans-serif;
+    font-size: 1.1em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #2A2A2A;
+}
+
+.container {
+    width: 33%;
+    padding: 1em;
+    box-sizing: border-box;
+    float: left;
+}
+
+table th {
+    text-align: left;
+}
+
+tr td:first-child {
+    width: 5em;
+}

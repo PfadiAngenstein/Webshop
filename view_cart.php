@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("config.php");
+require_once("functions.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,6 +9,7 @@ include_once("config.php");
 <meta name="theme-color" content="#FFEB3B">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <title>Warenkorb - Pfadi Angenstein</title>
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="style/normalize.css">
 <link rel="stylesheet" type="text/css" href="style/style.css">
 <link rel="stylesheet" type="text/css" href="style/colorbox.css">
@@ -36,6 +37,7 @@ include_once("config.php");
 		foreach ($_SESSION["products"] as $cart_itm)
         {
            $product_code = $cart_itm["code"];
+           $mysqli = getDbConnection();
 		   $results = $mysqli->query("SELECT product_name,product_desc, price FROM products WHERE product_code='$product_code' LIMIT 1");
 		   $obj = $results->fetch_object();
 		   
@@ -51,11 +53,8 @@ include_once("config.php");
 			$subtotal = ($cart_itm["price"]*$cart_itm["qty"]);
 			$total = ($total + $subtotal);
 
-			echo '<input type="hidden" name="item_name['.$cart_items.']" value="'.$obj->product_name.'" />';
 			echo '<input type="hidden" name="item_code['.$cart_items.']" value="'.$product_code.'" />';
-			echo '<input type="hidden" name="item_desc['.$cart_items.']" value="'.$obj->product_desc.'" />';
 			echo '<input type="hidden" name="item_qty['.$cart_items.']" value="'.$cart_itm["qty"].'" />';
-			echo '<input type="hidden" name="price['.$cart_items.']" value="'.$obj->price.'" />';
 			$cart_items ++;
 			
         }
@@ -78,7 +77,7 @@ include_once("config.php");
 		<p><span class="wichtig"><strong>BITTE BEACHTEN:</strong> Je nach Uniformgrösse kann der Preis der Unifrom geringfügig nach unten schwanken. Der Bekleidungsstellenverantwortliche wird Ihnen alles weitere mitteilen.</span></p>
 		<p><span class="wichtig">Die genauen Preise für die Uniformen können <strong><a class='iframe' href="http://www.pfadiangenstein.ch/shop/preise.html">hier</a></strong> nachgeschaut werden.</span></p>
 		<p>Wenn die Bestellung in Ordnung ist, klicken Sie auf den untenstehenden Button. Der Bekleidungsstellenverantwortliche wird sich bei Ihnen melden. Geben Sie hierfür bitte noch Ihre Kontaktdaten ein.</p>
-		<p>Bei Fragen wenden Sie sich an <a href="mailto:shop@pfadiangenstein.ch">shop@pfadiangenstein.ch</a>.</p>
+		<p>Bei Fragen wenden Sie sich bitte an den Verantwortlichen der Bekleidungsstelle.</p>
 		<table>
 			<tr>
 				<td>Name</td>
@@ -86,7 +85,7 @@ include_once("config.php");
 			</tr>
 			<tr>
 				<td>E-Mail</td>
-				<td><input type="email" name="email" placeholder="beispiel@pfadiangenstein.ch" required></td>
+				<td><input type="email" name="email" placeholder="beispiel@domain.ch" required></td>
 			</tr>
 			<tr>
 				<td>Telefon</td>
