@@ -31,7 +31,7 @@
     <div class="products">
         <?php
         //current URL of the Page. cart_update.php redirects back to this URL
-        $current_url = base64_encode($url="http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+        $current_url = base64_encode($url="https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
         $mysqli = getDbConnection();
         $results = $mysqli->query("SELECT * FROM products ORDER BY id ASC");
         if ($results) { 

@@ -61,7 +61,7 @@
  </div>
  </form> 
  
- <p><a href="http://www.pfadiangenstein.ch/shop/admin">Abbrechen</a></p>
+ <p><a href="https://www.pfadiangenstein.ch/shop/admin">Abbrechen</a></p>
  
  </body>
  </html>

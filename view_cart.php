@@ -27,7 +27,7 @@ require_once("functions.php");
 
  <div class="view-cart">
  	<?php
-    $current_url = base64_encode($url="http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+    $current_url = base64_encode($url="https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 	if(isset($_SESSION["products"]))
     {
 	    $total = 0;
@@ -75,7 +75,7 @@ require_once("functions.php");
 	<div class="view-cart">
 		<p>Bitte die Bestellung nochmals überprüfen! Falls etwas geändert werden muss, gehen Sie <a href="index.php">zurück zum Shop</a>.</p>
 		<p><span class="wichtig"><strong>BITTE BEACHTEN:</strong> Je nach Uniformgrösse kann der Preis der Unifrom geringfügig nach unten schwanken. Der Bekleidungsstellenverantwortliche wird Ihnen alles weitere mitteilen.</span></p>
-		<p><span class="wichtig">Die genauen Preise für die Uniformen können <strong><a class='iframe' href="http://www.pfadiangenstein.ch/shop/preise.html">hier</a></strong> nachgeschaut werden.</span></p>
+		<p><span class="wichtig">Die genauen Preise für die Uniformen können <strong><a class='iframe' href="https://www.pfadiangenstein.ch/shop/preise.html">hier</a></strong> nachgeschaut werden.</span></p>
 		<p>Wenn die Bestellung in Ordnung ist, klicken Sie auf den untenstehenden Button. Der Bekleidungsstellenverantwortliche wird sich bei Ihnen melden. Geben Sie hierfür bitte noch Ihre Kontaktdaten ein.</p>
 		<p>Bei Fragen wenden Sie sich bitte an den Verantwortlichen der Bekleidungsstelle.</p>
 		<table>

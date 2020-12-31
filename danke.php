@@ -25,7 +25,7 @@
  	<h2>Bestellung wurde versendet!</h2>
  	<p>Besten Dank f&uuml;r Ihre Bestellung.</p>
  	<p>Bei Fragen zu Ihrer Bestellung wenden Sie sich an den Verantwortlichen der Bekleidungsstelle.</p>
-	<p>Gehen Sie zur&uuml;ck auf <a href="http://www.pfadiangenstein.ch">www.pfadiangenstein.ch</a>.</p>
+	<p>Gehen Sie zur&uuml;ck auf <a href="https://www.pfadiangenstein.ch">www.pfadiangenstein.ch</a>.</p>
     </div>
 
 

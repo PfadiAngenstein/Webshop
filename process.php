@@ -57,7 +57,7 @@ td {
 
       echo "<pre>";
       if(sendMail($antwortan, $betreff, $mailtext)) {
-        header('Location: http://www.pfadiangenstein.ch/shop/danke.php');
+        header('Location: https://www.pfadiangenstein.ch/shop/danke.php');
       }
       echo "</pre>";
 	 ?>
