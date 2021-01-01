@@ -1,6 +1,4 @@
 <?php
-    session_start();
-    include_once("config.php");
     include_once("functions.php");
 ?>
 
@@ -12,8 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     
     <title>Webshop - Pfadi Angenstein</title>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style/normalize.css">
@@ -27,73 +23,66 @@
          </div>
     </div>
     
-<div id="products-wrapper">
-    <div class="products">
-        <?php
-        //current URL of the Page. cart_update.php redirects back to this URL
-        $current_url = base64_encode($url="https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-        $mysqli = getDbConnection();
-        $results = $mysqli->query("SELECT * FROM products ORDER BY id ASC");
-        if ($results) { 
+    <div id="products-wrapper">
+        <div class="products" id="product-container">
 
-            //fetch results set as object and output HTML
-            while($obj = $results->fetch_object())
-            {
-                echo '<div class="product">'; 
-                echo '<form method="post" action="cart_update.php">';
-                echo '<div class="product-thumb"><img src="images/'.$obj->product_img_name.'"></div>';
-                echo '<div class="product-content"><h3>'.$obj->product_name.'</h3>';
-                echo '<div class="product-desc">'.$obj->product_desc.'</div>';
-                echo '<div class="product-info">';
-                echo '<span class="preis">Preis '.$GLOBALS['cfg_db_currency'].$obj->price.' </span>| ';
-                echo 'Anzahl <input type="number" name="product_qty" value="1" size="3" />';
-                echo '<button class="add_to_cart">In den Warenkorb</button>';
-                echo '</div></div>';
-                echo '<input type="hidden" name="product_code" value="'.$obj->product_code.'" />';
-                echo '<input type="hidden" name="type" value="add" />';
-                echo '<input type="hidden" name="return_url" value="'.$current_url.'" />';
-                echo '</form>';
-                echo '</div>';
-            }
+            <div class="hidden" id="products-spinner"><img src="images/spinner.gif" /></div>
 
-        }
-        ?>
+            <!-- products get added here by js -->
+
+        </div>
+        
+        <div id="sticky-anchor"></div>
+        <div class="shopping-cart" id="shopping-cart">
+            <h2><a href="view_cart.php">Warenkorb</a></h2>
+
+            <ol>
+                <!-- cart items get added here by js -->
+            </ol>
+
+            <strong>Total : <span></span></strong><br>
+            <a href="view_cart.php"><button>Bestellung abschliessen</button></a><br>
+            <span class="empty-cart"><a href="cart_update.php?emptycart=1&return_url="><button>Warenkorb leeren</button></a></span>
+        </div>
     </div>
-    
-    <div id="sticky-anchor"></div>
-    <div class="shopping-cart" id="shopping-cart">
-        <h2><a href="view_cart.php">Warenkorb</a></h2>
-        <?php
-        if(isset($_SESSION["products"]))
-        {
-            $total = 0;
-            echo '<ol>';
-            foreach ($_SESSION["products"] as $cart_itm)
-            {
-                echo '<li class="cart-itm">';
-                echo '<span class="remove-itm"><a href="cart_update.php?removep='.$cart_itm["code"].'&return_url='.$current_url.'">&times;</a></span>';
-                echo '<h3>'.$cart_itm["name"].'</h3>';
-                echo '<div class="p-code">Produktcode: '.$cart_itm["code"].'</div>';
-                echo '<div class="p-qty">Anzahl: '.$cart_itm["qty"].'</div>';
-                echo '<div class="p-price">Preis: '.$currency.$cart_itm["price"].'</div>';
-                echo '</li>';
-                $subtotal = ($cart_itm["price"]*$cart_itm["qty"]);
-                $total = ($total + $subtotal);
-            }
-            echo '</ol>';
-            echo '<strong>Total : '.$currency.$total.'</strong><br><a href="view_cart.php"><button>Bestellung abschliessen</button></a><br>';
-            echo '<span class="empty-cart"><a href="cart_update.php?emptycart=1&return_url='.$current_url.'"><button>Warenkorb leeren</button></a></span>';
-        } else {
-            echo 'Der Warenkorb ist leer.';
-        }
-        ?>
-    </div>
-</div>
    
-<div class="clear"></div>
+    <div class="clear"></div>
+    
     <footer>
         <p>&copy; Pfadi Angenstein</p>
     </footer>
+
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/script.js"></script>
+
+
+<!-- TEMPLATES -->
+<div class="product hidden" id="product-template">
+    <form method="post" action="cart_update.php">
+        <div class="product-thumb"><img src="images/"></div>
+        <div class="product-content">
+            <h3>name_not_found</h3>
+            <div class="product-desc">desc</div>
+            <div class="product-info">
+                <span class="preis"></span>| Anzahl <input type="number" name="product_qty" value="1" size="3" />
+                <button type="submit" class="add_to_cart">In den Warenkorb</button>
+            </div>
+        </div>
+        <input type="hidden" name="product_code" value="product_code" />
+        <input type="hidden" name="type" value="add" />
+        <input type="hidden" name="return_url" value="current_url" />
+    </form>
+</div>
+
+
+<li class="cart-itm hidden" id="cart-itm-template">
+    <span class="remove-itm"><a href="cart_update.php?">&times;</a></span>
+    <h3>name</h3>
+    <div class="p-code">Produktcode: code</div>
+    <div class="p-qty">Anzahl: qty</div>
+    <div class="p-price">Preis: price</div>
+</li>
+
 
 </body>
 </html>

@@ -16,6 +16,10 @@ body {
     font-size: 1.1em;
 }
 
+.hidden {
+    display: none;
+}
+
 a,
 a:link,
 a:visited {

@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once("functions.php");
 
 //empty cart by distroying current session
@@ -7,7 +6,7 @@ if(isset($_GET["emptycart"]) && $_GET["emptycart"]==1)
 {
 	$return_url = base64_decode($_GET["return_url"]); //return url
 	session_destroy();
-	header('Location:'.$return_url);
+	header('Location: '.$return_url);
 }
 
 //add item in shopping cart
@@ -30,23 +29,28 @@ if(isset($_POST["type"]) && $_POST["type"]=='add')
 	if ($results) { //we have the product info 
 		
 		//prepare array for the session variable
-		$new_product = array(array('name'=>$obj->product_name, 'code'=>$product_code, 'qty'=>$product_qty, 'price'=>$obj->price));
+		$new_product = array(array('name'=>utf8_encode($obj->product_name), 'code'=>$product_code, 'qty'=>$product_qty, 'price'=>$obj->price));
 		
 		if(isset($_SESSION["products"])) //if we have the session
 		{
 			$found = false; //set found item to false
-			
+			$sum = 0;
+
 			foreach ($_SESSION["products"] as $cart_itm) //loop through session array
 			{
 				if($cart_itm["code"] == $product_code){ //the item exist in array
-
 					$product[] = array('name'=>$cart_itm["name"], 'code'=>$cart_itm["code"], 'qty'=>$product_qty, 'price'=>$cart_itm["price"]);
 					$found = true;
+					$sum += intval($cart_itm["price"]) * intval($product_qty);
 				}else{
 					//item doesn't exist in the list, just retrive old info and prepare array for session var
 					$product[] = array('name'=>$cart_itm["name"], 'code'=>$cart_itm["code"], 'qty'=>$cart_itm["qty"], 'price'=>$cart_itm["price"]);
+					$sum += intval($cart_itm["price"]) * intval($cart_itm["qty"]);
 				}
 			}
+
+			$_SESSION["sum"] = $sum;
+			$_SESSION["sum_text"] = $sum + $GLOBALS['cfg_db_currency'];
 			
 			if($found == false) //we didn't find item in array
 			{
@@ -65,7 +69,7 @@ if(isset($_POST["type"]) && $_POST["type"]=='add')
 	}
 	
 	//redirect back to original page
-	header('Location:'.$return_url);
+	header('Location: '.$return_url);
 }
 
 //remove item from shopping cart
@@ -77,12 +81,16 @@ if(isset($_GET["removep"]) && isset($_GET["return_url"]) && isset($_SESSION["pro
 	
 	foreach ($_SESSION["products"] as $cart_itm) //loop through session array var
 	{
+		$sum = 0;
 		if($cart_itm["code"]!=$product_code){ //item does,t exist in the list
 			$product[] = array('name'=>$cart_itm["name"], 'code'=>$cart_itm["code"], 'qty'=>$cart_itm["qty"], 'price'=>$cart_itm["price"]);
+			$sum += intval($cart_itm["price"]);
 		}
 		
 		//create a new product list for cart
 		$_SESSION["products"] = $product;
+		$_SESSION["sum"] = $sum;
+		$_SESSION["sum_text"] = $sum + $GLOBALS['cfg_db_currency'];
 	}
 	
 	//redirect back to original page

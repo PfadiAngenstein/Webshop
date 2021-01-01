@@ -1,6 +1,5 @@
 <?php
-session_start();
-require_once("functions.php");
+	require_once("functions.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,9 +12,6 @@ require_once("functions.php");
 <link rel="stylesheet" type="text/css" href="style/normalize.css">
 <link rel="stylesheet" type="text/css" href="style/style.css">
 <link rel="stylesheet" type="text/css" href="style/colorbox.css">
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="js/jquery.colorbox-min.js"></script>
 </head>
 <body>
 <div class="banner">
@@ -25,86 +21,60 @@ require_once("functions.php");
 </div>
 <div id="products-wrapper">
 
- <div class="view-cart">
- 	<?php
-    $current_url = base64_encode($url="https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-	if(isset($_SESSION["products"]))
-    {
-	    $total = 0;
-		echo '<form method="post" action="process.php">';
-		echo '<ul>';
-		$cart_items = 0;
-		foreach ($_SESSION["products"] as $cart_itm)
-        {
-           $product_code = $cart_itm["code"];
-           $mysqli = getDbConnection();
-		   $results = $mysqli->query("SELECT product_name,product_desc, price FROM products WHERE product_code='$product_code' LIMIT 1");
-		   $obj = $results->fetch_object();
-		   
-		    echo '<li class="cart-itm">';
-			
-			echo '<div class="p-price">'.$currency.$obj->price.'</div>';
-            echo '<div class="product-info">';
-			echo '<h3>'.$obj->product_name.' (Code: '.$product_code.')</h3> ';
-            echo '<div class="p-qty">Anzahl : '.$cart_itm["qty"].'</div>';
-            echo '<div>'.$obj->product_desc.'</div>';
-			echo '</div>';
-            echo '</li>';
-			$subtotal = ($cart_itm["price"]*$cart_itm["qty"]);
-			$total = ($total + $subtotal);
+	<form method="post" action="process.php">
+		<div class="view-cart" id="shopping-cart-detail">
+			<ul>
+				<!-- cart items get added here by js -->
+			</ul>
+			<div class="bestelltotal">
+				<strong>Total : <span id="cart-total">0</span></strong>
+			</div>
 
-			echo '<input type="hidden" name="item_code['.$cart_items.']" value="'.$product_code.'" />';
-			echo '<input type="hidden" name="item_qty['.$cart_items.']" value="'.$cart_itm["qty"].'" />';
-			$cart_items ++;
-			
-        }
-    	echo '</ul>';
-		echo '<div class="bestelltotal">';
-		echo '<strong>Total : '.$currency.$total.'</strong>  ';
-		echo '</div>';
+			<pre><?php //echo var_dump($_SESSION); ?></pre>
+		</div>
 
-		
-    }else{
-		echo 'Der Warenkorb ist leer. <a href="index.php">Zur&uuml;ck zum Shop.</a>';
-	}
-	
-    ?>
-    </div>
+		<div class="cart-empty hidden">
+			Der Warenkorb ist leer. <a href="index.php">Zurück zum Shop.</a>
+		</div>
 
 
-	<div class="view-cart">
-		<p>Bitte die Bestellung nochmals überprüfen! Falls etwas geändert werden muss, gehen Sie <a href="index.php">zurück zum Shop</a>.</p>
-		<p><span class="wichtig"><strong>BITTE BEACHTEN:</strong> Je nach Uniformgrösse kann der Preis der Unifrom geringfügig nach unten schwanken. Der Bekleidungsstellenverantwortliche wird Ihnen alles weitere mitteilen.</span></p>
-		<p><span class="wichtig">Die genauen Preise für die Uniformen können <strong><a class='iframe' href="https://www.pfadiangenstein.ch/shop/preise.html">hier</a></strong> nachgeschaut werden.</span></p>
-		<p>Wenn die Bestellung in Ordnung ist, klicken Sie auf den untenstehenden Button. Der Bekleidungsstellenverantwortliche wird sich bei Ihnen melden. Geben Sie hierfür bitte noch Ihre Kontaktdaten ein.</p>
-		<p>Bei Fragen wenden Sie sich bitte an den Verantwortlichen der Bekleidungsstelle.</p>
-		<table>
-			<tr>
-				<td>Name</td>
-				<td><input type="text" name="name" placeholder="Vor- und Nachname" required></td>
-			</tr>
-			<tr>
-				<td>E-Mail</td>
-				<td><input type="email" name="email" placeholder="beispiel@domain.ch" required></td>
-			</tr>
-			<tr>
-				<td>Telefon</td>
-				<td><input type="number" name="telefon" placeholder="Telefonummer" required></td>
-			</tr>
-			<tr>
-				<td>Bemerkung</td>
-				<td><textarea name="bemerkung" placeholder="geschätzte Uniformgrösse, wann am besten Erreichbar usw." rows="5" cols="50"></textarea></td>
-			</tr>
-		</table>
-		<button type="sumbit">Bestellung absenden</button>
-	</div>
-		<?php echo '</form>'; ?>
+		<div class="view-cart">
+			<p>Bitte die Bestellung nochmals überprüfen! Falls etwas geändert werden muss, gehen Sie <a href="index.php">zurück zum Shop</a>.</p>
+			<p><span class="wichtig"><strong>BITTE BEACHTEN:</strong> Je nach Uniformgrösse kann der Preis der Unifrom geringfügig nach unten schwanken. Der Bekleidungsstellenverantwortliche wird Ihnen alles weitere mitteilen.</span></p>
+			<p><span class="wichtig">Die genauen Preise für die Uniformen können <strong><a class='iframe' href="https://www.pfadiangenstein.ch/shop/preise.html">hier</a></strong> nachgeschaut werden.</span></p>
+			<p>Wenn die Bestellung in Ordnung ist, klicken Sie auf den untenstehenden Button. Der Bekleidungsstellenverantwortliche wird sich bei Ihnen melden. Geben Sie hierfür bitte noch Ihre Kontaktdaten ein.</p>
+			<p>Bei Fragen wenden Sie sich bitte an den Verantwortlichen der Bekleidungsstelle.</p>
+			<table>
+				<tr>
+					<td>Name</td>
+					<td><input type="text" name="name" placeholder="Vor- und Nachname" required></td>
+				</tr>
+				<tr>
+					<td>E-Mail</td>
+					<td><input type="email" name="email" placeholder="beispiel@domain.ch" required></td>
+				</tr>
+				<tr>
+					<td>Telefon</td>
+					<td><input type="number" name="telefon" placeholder="Telefonummer" required></td>
+				</tr>
+				<tr>
+					<td>Bemerkung</td>
+					<td><textarea name="bemerkung" placeholder="geschätzte Uniformgrösse, wann am besten Erreichbar usw." rows="5" cols="50"></textarea></td>
+				</tr>
+			</table>
+			<button type="sumbit">Bestellung absenden</button>
+		</div>
+	</form>
 </div>
 
 <div class="clear"></div>
 <footer>
 	<p>&copy; Pfadi Angenstein</p>
 </footer>
+
+<script src="js/jquery-3.5.1.min.js"></script>
+<script src="js/jquery.colorbox-min.js"></script>
+<script src="js/script.js"></script>
 
 <script>
 $(document).ready(function(){
@@ -127,7 +97,21 @@ $(document).ready(function(){
 					return false;
 				});
 			});
-		</script>
+</script>
+
+
+<!-- TEMPLATES -->
+<li class="cart-itm hidden" id="cart-itm-template">
+	<div class="p-price"></div>
+	<div class="product-info">
+		<h3></h3> 
+		<div class="p-qty">Anzahl : <span></span></div>
+		<div class="p-desc"></div>
+	</div>
+	<input type="hidden" name="item_code[]" value="" />
+	<input type="hidden" name="item_qty[]" value="" />
+</li>
+
 
 </body>
 </html>
