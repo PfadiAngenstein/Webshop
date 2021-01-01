@@ -33,35 +33,47 @@ $(document).ready(function() {
 
 	// load and show shopping cart
 	if($("#shopping-cart").length) {
+		updateCart();
+	}
+
+	// add product to cart
+	$(document).on("submit", ".product form", function(e) {
+		e.preventDefault();
+		var formData = $(this).serialize();
+		
 		$.ajax({
 			method: "POST",
-			url: "functions.php?cmd=getCart",
+			url: "functions.php?cmd=addToCart",
+			data: formData,
 			success: function(data) {
 				data = JSON.parse(data);
-				console.log(data);
 				if(data.success) {
-					if(data.products.length > 0) {
-						$.each(data.products, function(i, row) {
-							var box = $("#cart-itm-template").clone().removeAttr( 'id' ).removeClass("hidden");
+					updateCart();
+				} else {
+					// TODO: error handling
+					return false;
+				}
+			}
+		});
+	});
 
-							box.find('.remove-itm a').attr("href", box.find('.remove-itm a').attr("href") + "removep=" + row.code + "&return_url=" + data.return_url);
-							box.find('h3').text(row.name);
-							box.find('.p-code').text(row.code);
-							box.find('.p-qty').text(row.qty);
-							box.find('.p-price').text(row.price);
-
-							$("#shopping-cart ol").append(box);
-						});
-					}
+	// remove product from cart
+	$(document).on("click", ".remove-itm", function(e) {
+		e.preventDefault();
+		var code = $(this).parent().find(".p-code").text();
+		$.ajax({
+			method: "POST",
+			url: "functions.php?cmd=removep&code=" + code,
+			success: function(data) {
+				data = JSON.parse(data);
+				if(data.success) {
+					updateCart();
 				} else {
 					// TODO: error handling
 				}
-			},
-			complete: function() {
-				// TODO: spinner
 			}
 		});
-	}
+	});
 
 	// load an show shopping cart on shopping cart page
 	if($("#shopping-cart-detail").length) {
@@ -72,22 +84,19 @@ $(document).ready(function() {
 				data = JSON.parse(data);
 				if(data.success) {
 					if(data.products.length > 0) {
-						var sum = 0;
 						$.each(data.products, function(i, row) {
 							var box = $("#cart-itm-template").clone().removeAttr( 'id' ).removeClass("hidden");
 
 							box.find('h3').text(row.name);
 							box.find('.p-qty span').text(row.qty);
-							box.find('.p-price').text(row.price);
+							box.find('.p-price').text(row.price_text);
 							setProductDesc(box.find('.p-desc'), row.code);
-
-							sum += parseFloat(row.price);
 
 							$("#shopping-cart-detail ul").append(box);
 						});
 
 
-						$("#cart-total").text(sum);
+						$("#cart-total").text(data.sum_text);
 					}
 				} else {
 					// TODO: error handling
@@ -98,28 +107,6 @@ $(document).ready(function() {
 			}
 		});
 	}
-
-	$(document).on("submit", ".product form", function(e) {
-		e.preventDefault();
-		var formData = $(this).serialize();
-		console.log(formData);
-		
-		$.ajax({
-			method: "POST",
-			url: "functions.php?cmd=addToCart",
-			data: formData,
-			success: function(data) {
-				console.log(data);
-				data = JSON.parse(data);
-				if(data.success) {
-					//field.text(data.desc);
-				} else {
-					// TODO: error handling
-					return false;
-				}
-			}
-		});
-	});
 
 	function setProductDesc(field, code) {
 		$.ajax({
@@ -133,6 +120,41 @@ $(document).ready(function() {
 					// TODO: error handling
 					return false;
 				}
+			}
+		});
+	}
+
+	function updateCart() {
+		$.ajax({
+			method: "POST",
+			url: "functions.php?cmd=getCart",
+			success: function(data) {
+				data = JSON.parse(data);
+				if(data.success) {
+					$("#shopping-cart .cart-itm").remove();
+					
+					if(Object.keys(data.products).length > 0) {
+						$.each(data.products, function(i, row) {
+							var box = $("#cart-itm-template").clone().removeAttr( 'id' ).removeClass("hidden");
+
+							box.find('h3').text(row.name);
+							box.find('.p-code').text(row.code);
+							box.find('.p-qty').text(row.qty);
+							box.find('.p-price').text(row.price);
+
+							$("#shopping-cart ol").append(box);
+						});
+
+						//$("#shopping-cart span").text(data.sum_text); TODO: set sum but waiting for timo
+					} else {
+						// TODO: show empty cart
+					}
+				} else {
+					// TODO: error handling
+				}
+			},
+			complete: function() {
+				// TODO: spinner
 			}
 		});
 	}

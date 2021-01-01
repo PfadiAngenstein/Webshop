@@ -36,10 +36,11 @@
 		if( $cmd == 'getCart' ) {
 			$return = array("success" => true);
 			$return["return_url"] = base64_encode("https://".$_SERVER['HTTP_HOST'].substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], "/") + 1));
-			$return["products"] = (isset($_SESSION["products"])) ? $_SESSION["products"] : array();
-			echo json_encode($_SESSION);
+			$return["products"] = getProductArray();
+			$return["sum"] = getProductsSum($return["products"]);
+			$return["sum_text"] = $return["sum"] . " " . $GLOBALS["cfg_db_currency"];
 			
-			//echo json_encode($return);
+			echo json_encode($return);
 		}
 
 
@@ -56,6 +57,18 @@
 				echo json_encode(array("success" => false));
 			}
 		}
+
+
+
+
+		if( $cmd == 'removep' ) {
+			if(isset($_REQUEST['code'])) {
+				$db = getDbConnection();
+				$code = mysqli_real_escape_string($db, $_REQUEST['code']);
+				echo json_encode(array("success" => removeFromCart($code)));
+			}
+		}
+
 
 
 
@@ -95,15 +108,65 @@
 		}
 	}
 
+	function getProductName($code) {
+		$products = getProducts();
+		$found = false;
+		foreach ($products as $product) {
+			if($product['product_code'] == $code) {
+				$found = true;
+				$name = $product['product_name'];
+				break;
+			}
+		}
+		return ($found) ? $name : false;
+	}
+
 	function getProductPrice($code) {
 		$products = getProducts();
-		return (isset($products[$code])) ? $products[$code]['price'] : false;
+		$found = false;
+		foreach ($products as $product) {
+			if($product['product_code'] == $code) {
+				$found = true;
+				$price = floatval($product['price']);
+				break;
+			}
+		}
+		return ($found) ? $price : false;
+	}
+
+	function getProductArray() {
+		if(isset($_SESSION["products"])) {
+			$products = array();
+			foreach ($_SESSION["products"] as $code => $qty) {
+				$products[] = array(
+					"name" => getProductName($code),
+					"code" => $code,
+					"qty" => $qty,
+					"price" => getProductPrice($code),
+					"price_text" => getProductPrice($code) . " " . $GLOBALS["cfg_db_currency"]
+				);
+			}
+			return $products;
+		} else {
+			return array();
+		}
+	}
+
+	function getProductsSum($products) {
+		$sum = 0;
+		foreach ($products as $product) {
+			$sum += $product['price'] * $product['qty'];
+		}
+		return $sum;
 	}
 
 	function addToCart($code, $qty) {
 		$_SESSION['products'][$code] += $qty;
-		$_SESSION['sum'] = getProducts();
-		//$_SESSION['sum'] = getProductPrice($code);
+		return true;
+	}
+
+	function removeFromCart($code) {
+		unset($_SESSION['products'][$code]);
 		return true;
 	}
 
