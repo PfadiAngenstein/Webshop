@@ -15,10 +15,12 @@
     <body>
         <header>
             <a href="index.php"><img src="images/angenstein.gif" class="logo" alt="Logo Pfadi Angenstein"></a>
-            <h1 class="title">Pfadi Angenstein -  Webshop</h1>
+            <h1 class="title d-block d-sm-none">Webshop</h1>
+            <h1 class="title d-none d-sm-block">Pfadi Angenstein -  Webshop</h1>
             <img src="images/shopping-cart.svg" class="shopping-cart-icon">
             <p class="shopping-cart-count"></p>
         </header>
+        
         <div class="content">
             <div id="products-wrapper">
                 <div class="container">
