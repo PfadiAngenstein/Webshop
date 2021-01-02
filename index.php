@@ -21,11 +21,13 @@
         </header>
         <div class="container content">
             <div id="products-wrapper">
-                <div class="products" id="product-container">
+                <div class="container">
+                <div class="products row" id="product-container">
                     <div class="hidden" id="products-spinner"><img src="images/spinner.gif" /></div>
-
+                    
                             <!-- products get added here by js -->
 
+                </div>
                 </div>
                 <div class="shopping-cart" id="shopping-cart">
                     <div class="arrow-up"></div>
@@ -57,23 +59,23 @@
 
     <!-- TEMPLATES -->
 
-    <div class="product hidden" id="product-template">
-        <div class="container">
-            <form method="post" class="row" action="cart_update.php">
-            <div class="product-thumb col-2"><img src="images/"></div>
-                <div class="product-content col-10">
-                    <h3 class="product-name">name_not_found</h3>
+    <div class="product hidden col-sm-4" id="product-template">
+        <form method="post" class="product-style" action="cart_update.php">
+        <div class="product-thumb"><img src="images/"></div>
+            <div class="product-content">
+                <!-- <div class="more-desc">
                     <div class="product-desc">desc</div>
-                    <div class="product-info">
-                        <span class="preis"></span>| Anzahl <input type="number" name="product_qty" value="1" size="3" />
-                        <button type="submit" class="add_to_cart btn btn-sm btn-dark">In den Warenkorb</button>
-                    </div>
-                </div> 
-                <input type="hidden" name="product_code" value="product_code" />
-                <input type="hidden" name="type" value="add" />
-                <input type="hidden" name="return_url" value="current_url" />
-            </form>
-        </div>  
+                </div>   -->
+                <h3 class="product-name">name_not_found</h3>             
+                <div class="product-info">
+                    <span class="preis"></span>| Anzahl <input class="product-qty form-control" type="number" name="product_qty" value="1" size="3" />
+                    <button type="submit" class="add_to_cart btn btn-sm btn-dark">In den Warenkorb</button>
+                </div>
+            </div> 
+            <input type="hidden" name="product_code" value="product_code" />
+            <input type="hidden" name="type" value="add" />
+            <input type="hidden" name="return_url" value="current_url" />
+        </form>
     </div>
 
 

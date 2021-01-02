@@ -62,8 +62,22 @@ $(document).ready(function() {
 		});
 	});
 
+
+	// open shopping cart
 	$(document).on("click", ".shopping-cart-icon", function() {
-		$(".shopping-cart").toggle();
+		$(".shopping-cart").show();
+		console.log("toggle")
+	});
+
+	// close shopping cart onclick body
+	$(document).mouseup(function(e){
+		var container = $(".shopping-cart");
+	 
+		// If the target of the click isn't the container
+		if(!container.is(e.target) && container.has(e.target).length === 0){
+			container.hide();
+			console.log("hide outside")
+		}
 	});
 
 	$(document).on("click", "conetent", function() {
