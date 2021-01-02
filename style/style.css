@@ -46,7 +46,7 @@ header {
 .logo{
     margin: 8px 10px;
     height: 40px;
-    display: inline-block;
+    float: left;
 }
 
 /* shoppiung cart */

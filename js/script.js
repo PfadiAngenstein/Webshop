@@ -36,6 +36,11 @@ $(document).ready(function() {
 		updateCart();
 	}
 
+	// uniform pricelist popup
+	if($("a.iframe").length) {
+		$("a.iframe").colorbox({iframe:true, width:"80%", height:"80%"});
+	}
+
 	// add product to cart
 	$(document).on("submit", ".product form", function(e) {
 		e.preventDefault();

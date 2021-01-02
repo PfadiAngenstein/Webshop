@@ -8,6 +8,7 @@
 
 		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=PT+Sans:400,700">
 		<link rel="stylesheet" type="text/css" href="style/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="style/colorbox.css">
 		<link rel="stylesheet" type="text/css" href="style/style.css">
 	</head>
 
