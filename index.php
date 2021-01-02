@@ -19,7 +19,7 @@
             <img src="images/shopping-cart.svg" class="shopping-cart-icon">
             <p class="shopping-cart-count"></p>
         </header>
-        <div class="container content">
+        <div class="content">
             <div id="products-wrapper">
                 <div class="container">
                 <div class="products row" id="product-container">
@@ -59,7 +59,7 @@
 
     <!-- TEMPLATES -->
 
-    <div class="product hidden col-sm-4" id="product-template">
+    <div class="product hidden col-xs-12 col-sm-6 col-md-4" id="product-template">
         <form method="post" class="product-style" action="cart_update.php">
         <div class="product-thumb"><img src="images/"></div>
             <div class="product-content">

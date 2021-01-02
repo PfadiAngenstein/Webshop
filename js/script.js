@@ -64,24 +64,14 @@ $(document).ready(function() {
 
 
 	// open shopping cart
-	$(document).on("click", ".shopping-cart-icon", function() {
-		$(".shopping-cart").show();
-		console.log("toggle")
-	});
-
-	// close shopping cart onclick body
-	$(document).mouseup(function(e){
-		var container = $(".shopping-cart");
-	 
-		// If the target of the click isn't the container
-		if(!container.is(e.target) && container.has(e.target).length === 0){
-			container.hide();
-			console.log("hide outside")
+	$(document).on("click", function(e) {
+		if($(".shopping-cart-icon").is(e.target)) {
+			$(".shopping-cart").toggle();
+		} else {
+			if($(e.target).closest(".shopping-cart").length == 0) {
+				$(".shopping-cart").hide();
+			}
 		}
-	});
-
-	$(document).on("click", "conetent", function() {
-		$(".shopping-cart").hide();
 	});
 
 	// remove product from cart
