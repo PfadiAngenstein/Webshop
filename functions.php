@@ -72,6 +72,19 @@
 
 
 
+		if( $cmd == 'submitOrder' ) {
+			$db = getDbConnection();
+			$info = array();
+			if(isset($_REQUEST['name'])) { 		$info['name'] 		= mysqli_real_escape_string($db, $_REQUEST['name']); }
+			if(isset($_REQUEST['email'])) { 	$info['email'] 		= mysqli_real_escape_string($db, $_REQUEST['email']); }
+			if(isset($_REQUEST['telefon'])) { 	$info['phone'] 		= mysqli_real_escape_string($db, $_REQUEST['telefon']); }
+			if(isset($_REQUEST['bemerkung'])) { $info['comment'] 	= mysqli_real_escape_string($db, $_REQUEST['bemerkung']); }
+			echo json_encode(array("success" => submitOrder($info)));
+		}
+
+
+
+
 		if( $cmd == 'getProductDesc' ) {
 			$return = array("success" => false);
 			
@@ -168,6 +181,11 @@
 	function removeFromCart($code) {
 		unset($_SESSION['products'][$code]);
 		return true;
+	}
+
+	function submitOrder($info) {
+		$order = $info;
+		return include("mail_template.php");
 	}
 
 	function sendMail($replyTo, $subject, $body) {
