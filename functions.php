@@ -161,7 +161,7 @@
 	}
 
 	function addToCart($code, $qty) {
-		$_SESSION['products'][$code] += $qty;
+		$_SESSION['products'][$code] = (isset($_SESSION['products'][$code])) ? $_SESSION['products'][$code] + $qty : $qty;
 		return true;
 	}
 

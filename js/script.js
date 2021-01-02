@@ -46,6 +46,7 @@ $(document).ready(function() {
 			url: "functions.php?cmd=addToCart",
 			data: formData,
 			success: function(data) {
+				console.log(data);
 				data = JSON.parse(data);
 				if(data.success) {
 					updateCart();
@@ -55,6 +56,14 @@ $(document).ready(function() {
 				}
 			}
 		});
+	});
+
+	$(document).on("click", ".shopping-cart-icon", function() {
+		$(".shopping-cart").toggle();
+	});
+
+	$(document).on("click", "conetent", function() {
+		$(".shopping-cart").hide();
 	});
 
 	// remove product from cart
@@ -125,14 +134,16 @@ $(document).ready(function() {
 	}
 
 	function updateCart() {
+		console.log("JETZT");
 		$.ajax({
 			method: "POST",
 			url: "functions.php?cmd=getCart",
 			success: function(data) {
 				data = JSON.parse(data);
 				if(data.success) {
-					$("#shopping-cart .cart-itm").remove();
 					
+					$("#shopping-cart .cart-itm").remove();
+					var sum = 0;
 					if(Object.keys(data.products).length > 0) {
 						$.each(data.products, function(i, row) {
 							var box = $("#cart-itm-template").clone().removeAttr( 'id' ).removeClass("hidden");
@@ -143,12 +154,17 @@ $(document).ready(function() {
 							box.find('.p-price').text(row.price);
 
 							$("#shopping-cart ol").append(box);
+
+							sum += parseInt(row.qty);
 						});
+						
 
 						//$("#shopping-cart span").text(data.sum_text); TODO: set sum but waiting for timo
 					} else {
 						// TODO: show empty cart
 					}
+					console.log("length: " + sum);
+					$(".shopping-cart-count").text(sum);
 				} else {
 					// TODO: error handling
 				}

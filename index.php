@@ -11,39 +11,39 @@
     
     <title>Webshop - Pfadi Angenstein</title>
 
+    <link rel="stylesheet" type="text/css" href="style/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="style/normalize.css">
+    <!-- <link rel="stylesheet" type="text/css" href="style/normalize.css"> -->
     <link rel="stylesheet" type="text/css" href="style/style.css">
+    
 </head>
 
 <body>
-    <div class="banner">
-        <div class="content">
-            <a hreF="index.php"><h1><img src="images/angenstein.gif" alt="Logo Pfadi Angenstein">&nbsp;Webshop</h1></a>
-         </div>
-    </div>
+    <header>
+        <a href="index.php"><img src="images/angenstein.gif" class="logo" alt="Logo Pfadi Angenstein"></a>
+        <h1 class="title">Pfadi Angenstein -  Webshop</h1>
+        <img src="images/shopping-cart.svg" class="shopping-cart-icon">
+        <p class="shopping-cart-count"></p>
+    </header>
+    <div class="container content">
+        <div id="products-wrapper">
+            <div class="products" id="product-container">
+                <div class="hidden" id="products-spinner"><img src="images/spinner.gif" /></div>
+
+                        <!-- products get added here by js -->
+
+            </div>
+            <div class="shopping-cart" id="shopping-cart">
+                <div class="arrow-up"></div>
+                    <h2><a href="view_cart.php">Warenkorb</a></h2>
+
+                    <ol>
+                        <!-- cart items get added here by js -->
+                    </ol>
     
-    <div id="products-wrapper">
-        <div class="products" id="product-container">
-
-            <div class="hidden" id="products-spinner"><img src="images/spinner.gif" /></div>
-
-            <!-- products get added here by js -->
-
-        </div>
-        
-        <div id="sticky-anchor"></div>
-        <div class="shopping-cart" id="shopping-cart">
-            <h2><a href="view_cart.php">Warenkorb</a></h2>
-
-            <ol>
-                <!-- cart items get added here by js -->
-            </ol>
-
-            <strong>Total : <span></span></strong><br>
-            <a href="view_cart.php"><button>Bestellung abschliessen</button></a><br>
-            <span class="empty-cart"><a href="cart_update.php?emptycart=1&return_url="><button>Warenkorb leeren</button></a></span>
-        </div>
+                    <strong>Total : <span></span></strong><br>
+                    <a href="view_cart.php"><button class="btn btn-sm btn-dark">Bestellung abschliessen</button></a><br>                    </div>
+            </div>
     </div>
    
     <div class="clear"></div>
@@ -54,24 +54,28 @@
 
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/bootstrap.bundle.min"></script>
 
 
 <!-- TEMPLATES -->
+
 <div class="product hidden" id="product-template">
-    <form method="post" action="cart_update.php">
-        <div class="product-thumb"><img src="images/"></div>
-        <div class="product-content">
-            <h3>name_not_found</h3>
-            <div class="product-desc">desc</div>
-            <div class="product-info">
-                <span class="preis"></span>| Anzahl <input type="number" name="product_qty" value="1" size="3" />
-                <button type="submit" class="add_to_cart">In den Warenkorb</button>
-            </div>
-        </div>
-        <input type="hidden" name="product_code" value="product_code" />
-        <input type="hidden" name="type" value="add" />
-        <input type="hidden" name="return_url" value="current_url" />
-    </form>
+    <div class="container">
+        <form method="post" class="row" action="cart_update.php">
+        <div class="product-thumb col-2"><img src="images/"></div>
+            <div class="product-content col-10">
+                <h3 class="product-name">name_not_found</h3>
+                <div class="product-desc">desc</div>
+                <div class="product-info">
+                    <span class="preis"></span>| Anzahl <input type="number" name="product_qty" value="1" size="3" />
+                    <button type="submit" class="add_to_cart btn btn-sm btn-dark">In den Warenkorb</button>
+                </div>
+            </div> 
+            <input type="hidden" name="product_code" value="product_code" />
+            <input type="hidden" name="type" value="add" />
+            <input type="hidden" name="return_url" value="current_url" />
+        </form>
+    </div>  
 </div>
 
 
