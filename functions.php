@@ -23,7 +23,6 @@
 			} else {
 				$return["success"] = true;
 				$return["currency"] = $GLOBALS['cfg_db_currency'];
-				$return["return_url"] = base64_encode("https://".$_SERVER['HTTP_HOST'].substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], "/") + 1));
 				$return["products"] = $products;
 			}
 			
@@ -35,7 +34,6 @@
 
 		if( $cmd == 'getCart' ) {
 			$return = array("success" => true);
-			$return["return_url"] = base64_encode("https://".$_SERVER['HTTP_HOST'].substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], "/") + 1));
 			$return["products"] = getProductArray();
 			$return["sum"] = getProductsSum($return["products"]);
 			$return["sum_text"] = $return["sum"] . " " . $GLOBALS["cfg_db_currency"];
@@ -75,10 +73,15 @@
 		if( $cmd == 'submitOrder' ) {
 			$db = getDbConnection();
 			$info = array();
+
 			if(isset($_REQUEST['name'])) { 		$info['name'] 		= mysqli_real_escape_string($db, $_REQUEST['name']); }
 			if(isset($_REQUEST['email'])) { 	$info['email'] 		= mysqli_real_escape_string($db, $_REQUEST['email']); }
 			if(isset($_REQUEST['telefon'])) { 	$info['phone'] 		= mysqli_real_escape_string($db, $_REQUEST['telefon']); }
 			if(isset($_REQUEST['bemerkung'])) { $info['comment'] 	= mysqli_real_escape_string($db, $_REQUEST['bemerkung']); }
+
+			$info["sum"] = getProductsSum(getProductArray());
+			$info["sum_text"] = $info["sum"] . " " . $GLOBALS["cfg_db_currency"];
+			
 			echo json_encode(array("success" => submitOrder($info)));
 		}
 
@@ -183,9 +186,23 @@
 		return true;
 	}
 
+	function emptyCart() {
+		unset($_SESSION['products']);
+		return true;
+	}
+
 	function submitOrder($info) {
 		$order = $info;
-		return include("mail_template.php");
+		$order["products"] = getProductArray();
+		$mailHtml = include("mail_template.php");
+		$subject = "Webshop Pfadi Angenstein: Eine neue Bestellung ist eingegangen.";
+		$replyTo = array("mail" => $info['email'], "name" => $info['name']);
+//		if(sendMail($replyTo, $subject, $mailHtml)) {
+			emptyCart();
+			return true;
+//		} else {
+//			return false;
+//		}
 	}
 
 	function sendMail($replyTo, $subject, $body) {

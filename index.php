@@ -1,92 +1,90 @@
-<?php
-    include_once("functions.php");
-?>
-
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="theme-color" content="#FFEB3B">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    
-    <title>Webshop - Pfadi Angenstein</title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="theme-color" content="#FFEB3B">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        
+        <title>Webshop - Pfadi Angenstein</title>
 
-    <link rel="stylesheet" type="text/css" href="style/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i" rel="stylesheet">
-    <!-- <link rel="stylesheet" type="text/css" href="style/normalize.css"> -->
-    <link rel="stylesheet" type="text/css" href="style/style.css">
-    
-</head>
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=PT+Sans:400,700">
+        <link rel="stylesheet" type="text/css" href="style/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="style/style.css">
+        
+    </head>
 
-<body>
-    <header>
-        <a href="index.php"><img src="images/angenstein.gif" class="logo" alt="Logo Pfadi Angenstein"></a>
-        <h1 class="title">Pfadi Angenstein -  Webshop</h1>
-        <img src="images/shopping-cart.svg" class="shopping-cart-icon">
-        <p class="shopping-cart-count"></p>
-    </header>
-    <div class="container content">
-        <div id="products-wrapper">
-            <div class="products" id="product-container">
-                <div class="hidden" id="products-spinner"><img src="images/spinner.gif" /></div>
+    <body>
+        <header>
+            <a href="index.php"><img src="images/angenstein.gif" class="logo" alt="Logo Pfadi Angenstein"></a>
+            <h1 class="title">Pfadi Angenstein -  Webshop</h1>
+            <img src="images/shopping-cart.svg" class="shopping-cart-icon">
+            <p class="shopping-cart-count"></p>
+        </header>
+        <div class="container content">
+            <div id="products-wrapper">
+                <div class="products" id="product-container">
+                    <div class="hidden" id="products-spinner"><img src="images/spinner.gif" /></div>
 
-                        <!-- products get added here by js -->
+                            <!-- products get added here by js -->
 
-            </div>
-            <div class="shopping-cart" id="shopping-cart">
-                <div class="arrow-up"></div>
+                </div>
+                <div class="shopping-cart" id="shopping-cart">
+                    <div class="arrow-up"></div>
+
                     <h2><a href="view_cart.php">Warenkorb</a></h2>
 
                     <ol>
                         <!-- cart items get added here by js -->
                     </ol>
-    
-                    <strong>Total : <span></span></strong><br>
-                    <a href="view_cart.php"><button class="btn btn-sm btn-dark">Bestellung abschliessen</button></a><br>                    </div>
-            </div>
-    </div>
-   
-    <div class="clear"></div>
-    
-    <footer>
-        <p>&copy; Pfadi Angenstein</p>
-    </footer>
 
-    <script src="js/jquery-3.5.1.min.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/bootstrap.bundle.min"></script>
+                    <div class="cart-empty">Der Warenkorb ist leer :(</div>
 
-
-<!-- TEMPLATES -->
-
-<div class="product hidden" id="product-template">
-    <div class="container">
-        <form method="post" class="row" action="cart_update.php">
-        <div class="product-thumb col-2"><img src="images/"></div>
-            <div class="product-content col-10">
-                <h3 class="product-name">name_not_found</h3>
-                <div class="product-desc">desc</div>
-                <div class="product-info">
-                    <span class="preis"></span>| Anzahl <input type="number" name="product_qty" value="1" size="3" />
-                    <button type="submit" class="add_to_cart btn btn-sm btn-dark">In den Warenkorb</button>
+                    <strong>Total : <span class="cart-total"></span></strong><br>
+                    <a href="view_cart.php"><button class="btn btn-sm btn-dark">Bestellung abschliessen</button></a><br>
                 </div>
-            </div> 
-            <input type="hidden" name="product_code" value="product_code" />
-            <input type="hidden" name="type" value="add" />
-            <input type="hidden" name="return_url" value="current_url" />
-        </form>
-    </div>  
-</div>
+            </div>
+        </div>
+       
+        <div class="clear"></div>
+        
+        <footer>
+            <p>&copy; Pfadi Angenstein</p>
+        </footer>
+
+        <script src="js/jquery-3.5.1.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/script.js"></script>
 
 
-<li class="cart-itm hidden" id="cart-itm-template">
-    <span class="remove-itm"><a href="cart_update.php?">&times;</a></span>
-    <h3>name</h3>
-    <div class="p-code">Produktcode: code</div>
-    <div class="p-qty">Anzahl: qty</div>
-    <div class="p-price">Preis: price</div>
-</li>
+    <!-- TEMPLATES -->
+
+    <div class="product hidden" id="product-template">
+        <div class="container">
+            <form method="post" class="row" action="cart_update.php">
+            <div class="product-thumb col-2"><img src="images/"></div>
+                <div class="product-content col-10">
+                    <h3 class="product-name">name_not_found</h3>
+                    <div class="product-desc">desc</div>
+                    <div class="product-info">
+                        <span class="preis"></span>| Anzahl <input type="number" name="product_qty" value="1" size="3" />
+                        <button type="submit" class="add_to_cart btn btn-sm btn-dark">In den Warenkorb</button>
+                    </div>
+                </div> 
+                <input type="hidden" name="product_code" value="product_code" />
+                <input type="hidden" name="type" value="add" />
+                <input type="hidden" name="return_url" value="current_url" />
+            </form>
+        </div>  
+    </div>
 
 
-</body>
+    <li class="cart-itm hidden" id="cart-itm-template">
+        <span class="remove-itm"><a href="cart_update.php?">&times;</a></span>
+        <div class="p-name"><span></span></div>
+        <div class="p-code hidden"><span></span></div>
+        <div class="p-qty">Anzahl: <span></span></div>
+        <div class="p-price">Preis: <span></span></div>
+    </li>
+
+
+    </body>
 </html>

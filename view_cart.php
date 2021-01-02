@@ -1,17 +1,14 @@
-<?php
-	require_once("functions.php");
-?>
 <!DOCTYPE html>
-<html>
 	<head>
-		<meta charset="ISO-8859-4">
+		<meta charset="utf-8">
 		<meta name="theme-color" content="#FFEB3B">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
 		<title>Warenkorb - Pfadi Angenstein</title>
-		<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="style/normalize.css">
+
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=PT+Sans:400,700">
+		<link rel="stylesheet" type="text/css" href="style/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="style/style.css">
-		<link rel="stylesheet" type="text/css" href="style/colorbox.css">
 	</head>
 
 	<body>
@@ -28,6 +25,8 @@
 					<ul>
 						<!-- cart items get added here by js -->
 					</ul>
+
+					<div class="cart-empty">Der Warenkorb ist leer :(</div>
 
 					<div class="bestelltotal">
 						<strong>Total : <span id="cart-total">0</span></strong>
@@ -85,29 +84,6 @@
 		<script src="js/jquery.colorbox-min.js"></script>
 		<script src="js/script.js"></script>
 
-		<script>
-		$(document).ready(function(){
-						//Examples of how to assign the Colorbox event to elements
-						
-						$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
-						$(".callbacks").colorbox({
-							onOpen:function(){ alert('onOpen: colorbox is about to open'); },
-							onLoad:function(){ alert('onLoad: colorbox has started to load the targeted content'); },
-							onComplete:function(){ alert('onComplete: colorbox has displayed the loaded content'); },
-							onCleanup:function(){ alert('onCleanup: colorbox has begun the close process'); },
-							onClosed:function(){ alert('onClosed: colorbox has completely closed'); }
-						});
-
-						
-						
-						//Example of preserving a JavaScript event for inline calls.
-						$("#click").click(function(){ 
-							$('#click').css({"background-color":"#f00", "color":"#fff", "cursor":"inherit"}).text("Open this window again and this message will still be here.");
-							return false;
-						});
-					});
-		</script>
-
 
 		<!-- TEMPLATES -->
 		<li class="cart-itm hidden" id="cart-itm-template">
@@ -117,8 +93,6 @@
 				<div class="p-qty">Anzahl : <span></span></div>
 				<div class="p-desc"></div>
 			</div>
-			<input type="hidden" name="item_code[]" value="" />
-			<input type="hidden" name="item_qty[]" value="" />
 		</li>
 
 

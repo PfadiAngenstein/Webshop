@@ -46,7 +46,6 @@ $(document).ready(function() {
 			url: "functions.php?cmd=addToCart",
 			data: formData,
 			success: function(data) {
-				console.log(data);
 				data = JSON.parse(data);
 				if(data.success) {
 					updateCart();
@@ -104,8 +103,8 @@ $(document).ready(function() {
 							$("#shopping-cart-detail ul").append(box);
 						});
 
-
 						$("#cart-total").text(data.sum_text);
+						$("#shopping-cart-detail .cart-empty").hide();
 					}
 				} else {
 					// TODO: error handling
@@ -157,7 +156,6 @@ $(document).ready(function() {
 	}
 
 	function updateCart() {
-		console.log("JETZT");
 		$.ajax({
 			method: "POST",
 			url: "functions.php?cmd=getCart",
@@ -171,22 +169,22 @@ $(document).ready(function() {
 						$.each(data.products, function(i, row) {
 							var box = $("#cart-itm-template").clone().removeAttr( 'id' ).removeClass("hidden");
 
-							box.find('h3').text(row.name);
-							box.find('.p-code').text(row.code);
-							box.find('.p-qty').text(row.qty);
-							box.find('.p-price').text(row.price);
+							box.find('.p-name span').text(row.name);
+							box.find('.p-code span').text(row.code);
+							box.find('.p-qty span').text(row.qty);
+							box.find('.p-price span').text(row.price_text);
 
 							$("#shopping-cart ol").append(box);
 
 							sum += parseInt(row.qty);
 						});
-						
 
-						//$("#shopping-cart span").text(data.sum_text); TODO: set sum but waiting for timo
+						$("#shopping-cart .cart-empty").hide();
 					} else {
-						// TODO: show empty cart
+						$("#shopping-cart .cart-empty").show();
 					}
-					console.log("length: " + sum);
+
+					$("#shopping-cart .cart-total").text(data.sum_text);
 					$(".shopping-cart-count").text(sum);
 				} else {
 					// TODO: error handling

@@ -24,17 +24,19 @@
 		<td>Anzahl</td>
 		<td>Preis</td>
 	</tr>
-
-	<tr>
-		<td>name</td>
-		<td>qty</td>
-		<td>price</td>
-	</tr>
+	
+	<?php foreach ($order["products"] as $product) { ?>
+		<tr>
+			<td><?php echo $product["name"]; ?></td>
+			<td><?php echo $product["qty"]; ?></td>
+			<td><?php echo $product["price_text"]; ?></td>
+		</tr>
+	<?php } ?>
 
 	<tr style="font-weight:900;border-top:1px grey solid;">
 		<td>Total</td>
 		<td></td>
-		<td>total</td>
+		<td><?php echo $order["sum_text"]; ?></td>
 	</tr>
 </table>
 
