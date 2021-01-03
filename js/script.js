@@ -12,12 +12,12 @@ $(document).ready(function() {
 					$.each(data.products, function(i, row) {
 						var box = $( '#product-template' ).clone().removeAttr( 'id' ).removeClass("hidden");
 						
-						box.find('.product-thumb img').attr('src', box.find('.product-thumb img').attr('src') + row.product_img_name);
-						box.find('.product-content h3').text(row.product_name);
-						box.find('.product-desc').text(row.product_desc);
-						box.find('.preis').text(row.price + " " + data.currency);
-						box.find('input[name="product_code"]').val(row.product_code);
-						box.find('input[name="return_url"]').val(data.return_url);
+						box.find('.product-thumb img').attr('src', box.find('.product-thumb img').attr('src') + row.product.product_img_name);
+						box.find('.product-content h3').text(row.product.product_name);
+						box.find('.preis').text(row.product.price + " " + data.currency);
+						box.find('input[name="product_code"]').val(row.product.product_code);
+
+						// TODO: Show dropdown if row.sizes.length > 0
 
 						$("#product-container").append(box);
 					});

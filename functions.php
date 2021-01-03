@@ -117,7 +117,12 @@
 		$res = $db->query("SELECT * FROM products ORDER BY id ASC");
 		$products = array();
 		if($res) {
-			while($row = $res->fetch_assoc()) { $products[] = array_map( 'utf8_encode', $row ); }
+			while($row = $res->fetch_assoc()) {
+				$products[] = array(
+					"product" => array_map( 'utf8_encode', $row ),
+					"sizes" => getProductSizes($row["product_code"])
+				);
+			}
 			return $products;
 		} else {
 			return $db->error;
@@ -128,9 +133,9 @@
 		$products = getProducts();
 		$found = false;
 		foreach ($products as $product) {
-			if($product['product_code'] == $code) {
+			if($product['product']['product_code'] == $code) {
 				$found = true;
-				$name = $product['product_name'];
+				$name = $product['product']['product_name'];
 				break;
 			}
 		}
@@ -148,6 +153,18 @@
 			}
 		}
 		return ($found) ? $price : false;
+	}
+
+	function getProductSizes($code) {
+		$sizes = array();
+		$db = getDbConnection();
+		$res = $db->query("SELECT * FROM shop_sizes WHERE fk_product=(SELECT id from products WHERE product_code='$code' LIMIT 1)");
+		if($res->num_rows > 0) {
+			while($row = $res->fetch_assoc()) {
+				$sizes[] = array_map('utf8_encode', $row);
+			}
+		}
+		return $sizes;
 	}
 
 	function getProductArray() {
