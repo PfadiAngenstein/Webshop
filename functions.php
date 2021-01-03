@@ -146,9 +146,9 @@
 		$products = getProducts();
 		$found = false;
 		foreach ($products as $product) {
-			if($product['product_code'] == $code) {
+			if($product['product']['product_code'] == $code) {
 				$found = true;
-				$price = floatval($product['price']);
+				$price = floatval($product['product']['price']);
 				break;
 			}
 		}
