@@ -17,8 +17,11 @@
             <a href="index.php"><img src="images/angenstein.gif" class="logo" alt="Logo Pfadi Angenstein"></a>
             <h1 class="title d-block d-sm-none">Webshop</h1>
             <h1 class="title d-none d-sm-block">Pfadi Angenstein -  Webshop</h1>
-            <img src="images/shopping-cart.svg" class="shopping-cart-icon">
-            <p class="shopping-cart-count"></p>
+            <div class="shopping-cart-wrapper">
+                <img src="images/shopping-cart.svg" class="shopping-cart-icon">
+                <p class="shopping-cart-count"></p>
+            </div>
+               
         </header>
         
         <div class="content">
@@ -49,9 +52,10 @@
         </div>
        
         <div class="clear"></div>
-        
         <footer>
-            <p>&copy; Pfadi Angenstein</p>
+            <div id="copyright">
+                © 2021 Pfadi Angenstein<br>&nbsp;
+            </div>
         </footer>
 
         <script src="js/jquery-3.5.1.min.js"></script>
@@ -88,7 +92,5 @@
         <div class="p-qty">Anzahl: <span></span></div>
         <div class="p-price">Preis: <span></span></div>
     </li>
-
-
     </body>
 </html>

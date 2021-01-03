@@ -1,9 +1,4 @@
 @import 'https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700';
-/* IFRAME NEW WEBPAGE */
-footer,
-.banner {
-	display: none !important;
-}
 
 body {
     font-family: "PT Sans", sans-serif;
@@ -61,10 +56,15 @@ header {
     background-color: #fff;
 }
 
+.shopping-cart-wrapper{
+    position: absolute;
+    right: 15px;
+    top:6px;
+    background-color: #ffeb3b;
+}
+
 .shopping-cart-icon{
-    margin: 10.5px 30px;
     height: 35px;
-    float: right;
 }
 
 .shopping-cart-icon:hover{
@@ -84,8 +84,9 @@ header {
 
 .shopping-cart-count {
     font-weight: bold;
-    position: relative;
-    display: inline-block;
+    position: absolute;
+    top: 5px;
+    right: -6px;
     font-size: 10px;
     color: #FFF;
     background-color: #000000;
@@ -94,9 +95,7 @@ header {
     width: 15px;
     height: 15px;
     text-align: center;
-    float: right;
-    right: -70px;
-    top: 10px;
+    
 }
 
 .shopping-cart ol {
@@ -150,6 +149,16 @@ header {
 .product-qty{
     width: 60px;
     display: inline-block;
+}
+
+#copyright{
+    text-align: center;
+    font-size: 0.8em;
+    padding-top: 0.5em;
+    background-color: #2e2e2e;
+    color: #999999;
+    width: 100%;
+    max-width: 100%;
 }
 
 /* .more-desc{
