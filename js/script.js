@@ -13,7 +13,7 @@ $(document).ready(function() {
 						var box = $( '#product-template' ).clone().removeAttr( 'id' ).removeClass("hidden");
 						
 						box.find('.product-thumb img').attr('src', box.find('.product-thumb img').attr('src') + row.product.product_img_name);
-						box.find('.product-content h3').text(row.product.product_name);
+						box.find('.product-name').text(row.product.product_name);
 						box.find('.preis').text(row.product.price + " " + data.currency);
 						box.find('input[name="product_code"]').val(row.product.product_code);
 
